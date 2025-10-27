@@ -80,7 +80,10 @@ function TextTransition(props: PropsWithChildren<TextTransitionProps>) {
       {transitions((styles, item) => (
         <animated.div
           style={{ ...styles }}
-          ref={item === children ? currentRef : undefined}
+          ref={ref => {
+            if (item === children)
+              currentRef.current = ref;
+          }}
           children={item}
         />
       ))}
