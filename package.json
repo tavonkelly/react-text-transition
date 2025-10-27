@@ -8,7 +8,8 @@
   "module": "lib-esm/index.js",
   "scripts": {
     "build": "tsc && tsc --outDir lib-esm -m es6",
-    "dev": "webpack serve --progress --mode development --config demos/webpack.config.js"
+    "dev": "webpack serve --progress --mode development --config demos/webpack.config.js",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
