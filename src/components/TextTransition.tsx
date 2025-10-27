@@ -43,7 +43,7 @@ function TextTransition(props: PropsWithChildren<TextTransitionProps>) {
   });
 
   const [width, setWidth] = useState<number>(0);
-  const currentRef = useRef<HTMLDivElement>(null);
+  const currentRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>;
   const heightRef = useRef<number | string>('auto');
 
   useEffect(() => {
@@ -77,13 +77,17 @@ function TextTransition(props: PropsWithChildren<TextTransitionProps>) {
         height: heightRef.current,
       }}
     >
-      {transitions((styles, item) => (
-        <animated.div
-          style={{ ...styles }}
-          ref={item === children ? currentRef : undefined}
-          children={item}
-        />
-      ))}
+      {transitions((styles, item) => {
+        const currRef = item === children ? currentRef : null;
+        
+        return (
+          <animated.div
+            style={{ ...styles }}
+            ref={currRef}
+            children={item}
+          />
+        )
+      })}
     </animated.div>
   );
 }
